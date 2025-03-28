@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Match Quiz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            text-align: center;
+            padding: 40px;
+        }
+        .quiz-container {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 30px;
+            border-radius: 12px;
+            width: 50%;
+            margin: auto;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        select {
+            width: 85%;
+            padding: 12px;
+            margin: 12px 0;
+            border-radius: 8px;
+            border: none;
+            font-size: 16px;
+            background: white;
+            color: #333;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+        select:hover {
+            background: #f3f3f3;
+        }
+        select:focus {
+            outline: none;
+            border: 2px solid #ff9800;
+        }
+        button {
+            background: linear-gradient(135deg, #ff9800, #ff5722);
+            border: none;
+            padding: 12px 25px;
+            color: white;
+            font-size: 20px;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0px 5px 15px rgba(255, 152, 0, 0.4);
+        }
+        button:hover {
+            background: linear-gradient(135deg, #ff5722, #e64a19);
+            transform: translateY(-2px);
+            box-shadow: 0px 8px 20px rgba(255, 87, 34, 0.5);
+        }
+        #result-container {
+            margin-top: 20px;
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        img {
+            margin-top: 10px;
+            width: 250px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Find Your Best College Match</h1>
+    <p>Answer these questions to discover the best college for you.</p>
+
+    <div class="quiz-container">
+        <p><strong>1. What field are you interested in?</strong></p>
+        <select id="field">
+            <option value="" disabled selected>Select an option</option>
+            <option value="engineering">Engineering</option>
+            <option value="medical">Medical</option>
+            <option value="business">Business</option>
+            <option value="arts">Arts</option>
+        </select>
+
+        <p><strong>2. What is your budget?</strong></p>
+        <select id="budget">
+            <option value="" disabled selected>Select an option</option>
+            <option value="low">Low (Below ₹1 Lakh/year)</option>
+            <option value="medium">Medium (₹1-5 Lakh/year)</option>
+            <option value="high">High (₹5+ Lakh/year)</option>
+        </select>
+
+        <br><br>
+        <button onclick="findCollege()">Find My College</button>
+
+        <div id="result-container">
+            <p id="result"></p>
+            <img id="college-image" src="" alt="" style="display: none;">
+        </div>
+    </div>
+
+    <script>
+        function findCollege() {
+            let field = document.getElementById("field").value;
+            let budget = document.getElementById("budget").value;
+            let resultText = "";
+            let imageSrc = "";
+            let resultContainer = document.getElementById("result-container");
+            let resultElement = document.getElementById("result");
+            let imageElement = document.getElementById("college-image");
+
+            if (!field || !budget) {
+                resultElement.innerHTML = "⚠️ Please select both field and budget.";
+                resultElement.style.color = "red";
+                resultContainer.style.display = "block";
+                imageElement.style.display = "none";
+                return;
+            }
+
+            if (field === "engineering") {
+                if (budget === "low") {
+                    resultText = "Best Match: NIT Trichy";
+                    imageSrc = "nit-trichy.jpg";
+                } else if (budget === "medium") {
+                    resultText = "Best Match: IIT Delhi";
+                    imageSrc = "iit-delhi.png";
+                } else {
+                    resultText = "Best Match: IIT Bombay";
+                    imageSrc = "IIT Bombay.jpg";
+                }
+            } else if (field === "medical") {
+                if (budget === "low") {
+                    resultText = "Best Match: AIIMS Delhi";
+                    imageSrc = "aiims-delhi.webp";
+                } else if (budget === "medium") {
+                    resultText = "Best Match: JIPMER";
+                    imageSrc = "jipmer.jpg";
+                } else {
+                    resultText = "Best Match: CMC Vellore";
+                    imageSrc = "CMC Vellore.jpeg";
+                }
+            } else if (field === "business") {
+                if (budget === "low") {
+                    resultText = "Best Match: Delhi University (FMS)";
+                    imageSrc = "fms-delhi.webp";
+                } else if (budget === "medium") {
+                    resultText = "Best Match: IIM Indore";
+                    imageSrc = "iim-indore.jpg";
+                } else {
+                    resultText = "Best Match: IIM Bangalore";
+                    imageSrc = "iim-bnglr.png";
+                }
+            } else if (field === "arts") {
+                if (budget === "low") {
+                    resultText = "Best Match: JNU Delhi";
+                    imageSrc = "jnu.jpg";
+                } else if (budget === "medium") {
+                    resultText = "Best Match: Ashoka University";
+                    imageSrc = "ashoka-u.jpeg";
+                } else {
+                    resultText = "Best Match: Symbiosis Pune";
+                    imageSrc = "symbiosis.webp";
+                }
+            } else {
+                resultText = "No match found.";
+            }
+
+            // Display result
+            resultElement.innerHTML = `<strong>${resultText}</strong>`;
+            resultElement.style.color = "white";
+            imageElement.src = imageSrc;
+            imageElement.alt = resultText;
+            imageElement.style.display = "block";
+            resultContainer.style.display = "block";
+        }
+    </script>
+
+    
+    <footer>
+        <p>© 2025 Haarika Naidu. All rights reserved.</p>
+    </footer>
+</body>
+</html>
