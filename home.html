@@ -101,8 +101,9 @@
                 border-bottom: 2px solid #ff4500;
                 padding-bottom: 5px;
             }
+            
             .small-image {
-    width: 80%;
+                width: 80%;
 }
 
         </style>
@@ -115,8 +116,23 @@
                 <li><a href="home.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
+                <div id="google_translate_element"></div>
+
             </ul>
-        </nav>
+            </nav>
+            <meta name="google" content="notranslate">
+            <script type="text/javascript">
+                function googleTranslateElementInit() {
+                    new google.translate.TranslateElement({
+                        pageLanguage: 'en',
+                        includedLanguages: 'hi,ta,te,kn,ml', // Allowed languages: Hindi, Tamil, Telugu, Kannada, Malayalam
+                        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+                    }, 'google_translate_element');
+                }
+            </script>
+            
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
     </header>
 
     
